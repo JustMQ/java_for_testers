@@ -5,6 +5,8 @@ public class Triangle {
     static double sideA = 10.0;
     static double sideB = 8.0;
     static double sideC = 12.8;
+    static double triangleP = 30.8;
+    static double triangleA = 39.99;
 
     public boolean triangleVerification() {
         return  (Triangle.sideA + Triangle.sideB > Triangle.sideC &&
