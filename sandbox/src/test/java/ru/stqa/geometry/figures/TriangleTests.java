@@ -6,29 +6,22 @@ public class TriangleTests {
 
     @Test
     void canCalculateArea() {
-        var V = new Triangle();
+        var V = new Triangle(3, 4, 5);
         if (!V.triangleVerification()) {
             Assertions.fail("The existence of such a triangle is impossible.");
         }
-        var S = new Triangle();
-        Assertions.assertEquals(Triangle.triangleA, Math.round(S.triangleSquare()), 2);
-        String text = String.format("Area of a triangle with sides %f , %f and %f = %f",
-                Triangle.sideA, Triangle.sideB, Triangle.sideC, S.triangleSquare());
-        System.out.println(text);
+        double result = V.triangleSquare();
+        Assertions.assertEquals(6, result);
 
     }
 
     @Test
     void canCalculatePerimeter() {
-        var V = new Triangle();
+        var V = new Triangle(3, 4, 5);
         if (!V.triangleVerification()) {
             Assertions.fail("The existence of such a triangle is impossible.");
         }
-        var P = new Triangle();
-        Assertions.assertEquals(Triangle.triangleP, P.perimeter());
-        String text = String.format("Perimeter of a triangle with sides %f , %f and %f = %f",
-                Triangle.sideA, Triangle.sideB, Triangle.sideC, P.perimeter());
-        System.out.println(text);
+        double result = V.perimeter();
+        Assertions.assertEquals(12, result);
     }
 }
-

@@ -1,17 +1,15 @@
 package ru.stqa.geometry.figures;
 
-public class Triangle {
-
-    static double sideA = 10.0;
-    static double sideB = 8.0;
-    static double sideC = 12.8;
-    static double triangleP = 30.8;
-    static double triangleA = 39.99;
+public record Triangle(
+        double sideA,
+        double sideB,
+        double sideC
+) {
 
     public boolean triangleVerification() {
-        return  (Triangle.sideA + Triangle.sideB > Triangle.sideC &&
-                Triangle.sideB + Triangle.sideC > Triangle.sideA &&
-                Triangle.sideA + Triangle.sideC > Triangle.sideB);
+        return (sideA + sideB > sideC &&
+                sideB + sideC > sideA &&
+                sideA + sideC > sideB);
     }
 
     public double perimeter() {
@@ -19,8 +17,8 @@ public class Triangle {
     }
 
     public double triangleSquare() {
-        double p = perimeter()/2;
-        return Math.sqrt(p*(p-sideA)*(p-sideB)*(p-sideC));
+        double p = perimeter() / 2;
+        return Math.sqrt(p * (p - sideA) * (p - sideB) * (p - sideC));
     }
 
 
