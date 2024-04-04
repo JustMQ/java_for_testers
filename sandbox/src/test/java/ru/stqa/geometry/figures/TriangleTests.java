@@ -24,4 +24,25 @@ public class TriangleTests {
         double result = V.perimeter();
         Assertions.assertEquals(12, result);
     }
+
+    @Test
+    void cannotCreateTriangleWithNegativeSide() {
+        try {
+            new Triangle(-3.0, 4.0, 5.0);
+            Assertions.fail();
+        } catch (IllegalArgumentException exception) {
+            // OK
+        }
+    }
+
+    @Test
+    void cannotCreateImpossibleTriangle() {
+        try {
+            new Triangle(30.0, 4.0, 5.0);
+            Assertions.fail();
+        } catch (IllegalArgumentException exception) {
+            // OK
+        }
+    }
 }
+

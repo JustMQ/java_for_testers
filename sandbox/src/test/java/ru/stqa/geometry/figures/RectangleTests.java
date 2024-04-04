@@ -6,7 +6,7 @@ public class RectangleTests {
     @Test
     void cannotCreateRectangleWithNegativeSide() {
         try {
-            new Rectangle(-5.0, 3.0);
+            new Rectangle(5.0, 3.0);
             Assertions.fail();
         } catch (IllegalArgumentException exception) {
             // OK
