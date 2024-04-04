@@ -27,4 +27,25 @@ void cannotCreateSquareWithNegativeSide() {
         // OK
     }
 }
+
+@Test
+    void testEquality() {
+        var s1 = new Square(5.0);
+        var s2 = new Square(5.0);
+        Assertions.assertEquals(s1, s2);
+}
+
+    @Test
+    void testNotEquality() {
+        var s1 = new Square(5.0);
+        var s2 = new Square(4.0);
+        Assertions.assertNotEquals(s1, s2);
+    }
+
+    @Test
+    void testPassWithEquals() {
+        var s1 = new Square(5.0);
+        var s2 = new Square(5.0);
+        Assertions.assertTrue(s1.equals(s2));
+    }
 }
