@@ -1,7 +1,5 @@
 package ru.stqa.geometry.figures;
 
-import java.util.Objects;
-
 public record Triangle(
         double sideA,
         double sideB,
@@ -47,12 +45,6 @@ public record Triangle(
                 sideA + sideC < sideB) {
             throw new IllegalArgumentException("The existence of such a triangle is impossible");
         }
-    }
-
-    public boolean triangleVerification() {
-        return (sideA + sideB > sideC &&
-                sideB + sideC > sideA &&
-                sideA + sideC > sideB);
     }
 
     public double perimeter() {
