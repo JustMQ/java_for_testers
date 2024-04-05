@@ -3,11 +3,21 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class CanRemoveGroup {
+    public class CanRemoveGroup {
     private WebDriver driver;
+
+    private boolean isElementPresent(By locator) {
+        try {
+            driver.findElement(locator);
+            return true;
+        } catch (NoSuchElementException exception) {
+            return false;
+        }
+    }
 
     @BeforeEach
     public void setUp() {
@@ -18,6 +28,7 @@ public class CanRemoveGroup {
         driver.findElement(By.name("user")).sendKeys("admin");
         driver.findElement(By.name("pass")).sendKeys("secret");
         driver.findElement(By.xpath("//input[@value=\'Login\']")).click();
+        driver.findElement(By.linkText("groups")).click();
     }
 
     @AfterEach
@@ -28,6 +39,15 @@ public class CanRemoveGroup {
 
     @Test
     public void CanRemoveGroup() {
+        if (!isElementPresent(By.name("selected[]"))) {
+            driver.findElement(By.name("new")).click();
+            driver.findElement(By.name("group_name")).click();
+            driver.findElement(By.name("group_name")).sendKeys("Group Name");
+            driver.findElement(By.name("group_header")).sendKeys("Group Header");
+            driver.findElement(By.name("group_footer")).sendKeys("Group Footer");
+            driver.findElement(By.name("submit")).click();
+            driver.findElement(By.linkText("group page")).click();
+        }
         driver.findElement(By.linkText("groups")).click();
         driver.findElement(By.name("selected[]")).click();
         driver.findElement(By.name("delete")).click();
