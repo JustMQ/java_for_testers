@@ -1,9 +1,10 @@
-package tests;
+package tests.Groups;
 
 import model.GroupData;
 import org.junit.jupiter.api.Test;
+import tests.TestBase;
 
-public class GroupRemovalTests extends TestBase{
+public class GroupRemovalTests extends TestBase {
 
     @Test
     public void canRemoveGroup() {
