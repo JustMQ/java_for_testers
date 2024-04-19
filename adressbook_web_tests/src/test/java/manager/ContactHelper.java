@@ -70,4 +70,9 @@ public class ContactHelper extends HelperBase{
     private void InitContactCreation() {
         click(By.linkText("add new"));
     }
+
+    public int getCount() {
+        ReturnToHomePage();
+        return manager.driver.findElements(By.name("selected[]")).size();
+    }
 }
