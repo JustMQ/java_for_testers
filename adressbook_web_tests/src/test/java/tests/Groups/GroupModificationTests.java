@@ -1,8 +1,7 @@
 package tests.Groups;
 
 import model.GroupData;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import tests.TestBase;
 
 import java.util.ArrayList;

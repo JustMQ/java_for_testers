@@ -27,6 +27,20 @@ public class ContactHelper extends HelperBase{
         ReturnToContactsPage();
     }
 
+    public void modifyContact(ContactData contact, ContactData modifiedContact) {
+        ReturnToContactsPage();
+        InitContactModification();
+        FillContactsForm(modifiedContact);
+        UpdateContactCreation();
+        ReturnToContactsPage();
+    }
+
+    private void UpdateContactCreation() {
+        click(By.name("update"));
+    }
+
+    private void InitContactModification() { click(By.xpath("//*[contains(@title, 'Edit')] ")); }
+
     private void ReturnToContactsPage() {
         ReturnToHomePage();
     }
