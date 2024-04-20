@@ -3,6 +3,9 @@ package manager;
 import model.ContactData;
 import org.openqa.selenium.By;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ContactHelper extends HelperBase{
 
     public ContactHelper(ApplicationManager manager) {
@@ -17,23 +20,23 @@ public class ContactHelper extends HelperBase{
         SubmitContactCreation();
         ReturnToHomePage();
     }
-    public void removeContact() {
+    public void removeContact(ContactData contact) {
         ReturnToHomePage();
-        SelectContact();
+        SelectContact(contact);
         RemoveSelectedContact();
         ReturnToContactsPage();
     }
 
     private void ReturnToContactsPage() {
-        manager.driver.switchTo().alert().accept();
+        ReturnToHomePage();
     }
 
     private void RemoveSelectedContact() {
         click(By.xpath("//input[@value=\"Delete\"]"));
     }
 
-    private void SelectContact() {
-        click(By.name("selected[]"));
+    private void SelectContact(ContactData contact) {
+        click(By.cssSelector(String.format("input[value='%s']", contact.id())));
     }
 
     private void ReturnToHomePage() {
@@ -52,18 +55,6 @@ public class ContactHelper extends HelperBase{
         type(By.name("firstname"), contact.firstName());
         type(By.name("middlename"), contact.middleName());
         type(By.name("lastname"), contact.lastName());
-        type(By.name("nickname"), contact.nickname());
-        type(By.name("title"), contact.title());
-        type(By.name("company"), contact.company());
-        type(By.name("address"), contact.address());
-        type(By.name("home"), contact.telephoneHome());
-        type(By.name("mobile"), contact.telephoneMobile());
-        type(By.name("work"), contact.telephoneWork());
-        type(By.name("fax"), contact.telephoneFax());
-        type(By.name("email"), contact.email());
-        type(By.name("email2"), contact.email2());
-        type(By.name("email3"), contact.email3());
-        type(By.name("homepage"), contact.homepage());
 
     }
 
@@ -74,5 +65,18 @@ public class ContactHelper extends HelperBase{
     public int getCount() {
         ReturnToHomePage();
         return manager.driver.findElements(By.name("selected[]")).size();
+    }
+
+    public List<ContactData> getList() {
+        ReturnToHomePage();
+        var contacts = new ArrayList<ContactData>();
+        var tds = manager.driver.findElements(By.cssSelector("tr[name=\"entry\"]"));
+        for (var td : tds) {
+            var name = td.getText();
+            var checkbox = td.findElement(By.name("selected[]"));
+            var id = checkbox.getAttribute("value");
+            contacts.add(new ContactData().withId(id).withFirstName(name));
+        }
+        return contacts;
     }
 }
