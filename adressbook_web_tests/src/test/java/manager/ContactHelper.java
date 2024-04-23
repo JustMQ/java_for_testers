@@ -29,7 +29,7 @@ public class ContactHelper extends HelperBase{
 
     public void modifyContact(ContactData contact, ContactData modifiedContact) {
         ReturnToContactsPage();
-        InitContactModification();
+        InitContactModification(contact);
         FillContactsForm(modifiedContact);
         UpdateContactCreation();
         ReturnToContactsPage();
@@ -39,7 +39,7 @@ public class ContactHelper extends HelperBase{
         click(By.name("update"));
     }
 
-    private void InitContactModification() { click(By.xpath("//*[contains(@title, 'Edit')] ")); }
+    private void InitContactModification(ContactData contact) { click(By.xpath(String.format("//a[contains(@href,'edit.php?id=%s')]", contact.id()))); }
 
     private void ReturnToContactsPage() {
         ReturnToHomePage();
