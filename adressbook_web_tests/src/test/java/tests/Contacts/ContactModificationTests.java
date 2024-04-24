@@ -18,7 +18,8 @@ public class ContactModificationTests extends TestBase {
                     "",
                     "Ivan",
                     "Ivanovich",
-                    "Ivanov"));
+                    "Ivanov",
+                    ""));
         }
         var oldContacts = app.contacts().getList();
         var rnd = new Random();

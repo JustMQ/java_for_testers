@@ -3,15 +3,17 @@ package model;
 public record ContactData (
         String id,
         String firstName,
-         String middleName,
-         String lastName) {
+        String middleName,
+        String lastName,
+        String photo) {
 
-    public ContactData() {this("", "", "", "");}
+    public ContactData() {this("", "", "", "", "");}
 
-    public ContactData withId(String id) { return new ContactData(id, this.firstName, this.middleName,this.lastName);}
+    public ContactData withId(String id) { return new ContactData(id, this.firstName, this.middleName,this.lastName, this.photo);}
 
-    public ContactData withFirstName(String firstName) {return new ContactData(this.id, firstName, this.middleName, this.lastName);}
+    public ContactData withFirstName(String firstName) {return new ContactData(this.id, firstName, this.middleName, this.lastName, this.photo);}
 
-    public ContactData withLastName(String lastName) {return new ContactData(this.id, this.firstName, this.middleName, lastName);}
+    public ContactData withLastName(String lastName) {return new ContactData(this.id, this.firstName, this.middleName, lastName, this.photo);}
+    public ContactData withPhoto(String photo) {return new ContactData(this.id, this.firstName, this.middleName, this.lastName, photo);}
 }
 
