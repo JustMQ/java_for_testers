@@ -1,5 +1,7 @@
 package tests.Contacts;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import common.CommonFunctions;
 import model.ContactData;
 import org.junit.jupiter.api.Assertions;
@@ -8,13 +10,15 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import tests.TestBase;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 public class ContactCreationTests extends TestBase {
 
-    public static List<ContactData> contactProvider() {
+    public static ArrayList<ContactData> contactProvider() throws IOException {
         var result = new ArrayList<ContactData>();
         for (var firstName : List.of("", "contact firstName")) {
                 for (var lastName : List.of("", "contact lastName")) {
@@ -23,12 +27,10 @@ public class ContactCreationTests extends TestBase {
                                 .withLastName(lastName));
                                                                 }
                                                             }
-        for(int i = 0; i < 5; i++) {
-            result.add(new ContactData()
-                            .withFirstName(CommonFunctions.randomString(i * 10))
-                            .withLastName(CommonFunctions.randomString(i * 10))
-                );
-        }
+
+        ObjectMapper mapper = new ObjectMapper();
+        var value = mapper.readValue(new File("contacts.json"), new TypeReference<List<ContactData>>() {});
+        result.addAll(value);
         return result;
     }
 
@@ -54,7 +56,7 @@ public class ContactCreationTests extends TestBase {
                 .withFirstName(CommonFunctions.randomString(10))
                 .withLastName(CommonFunctions.randomString(10))
                 .withPhoto(randomFile("src/test/resources/images"));
-        app.contacts().createContact(contact);
+        app.contacts().createContactWithPhoto(contact);
     }
 
 }

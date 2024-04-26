@@ -21,6 +21,15 @@ public class ContactHelper extends HelperBase{
         SubmitContactCreation();
         ReturnToHomePage();
     }
+
+    public void createContactWithPhoto(ContactData contact) {
+
+        InitContactCreation();
+        FillContactsFormFull(contact);
+        SubmitContactCreation();
+        ReturnToHomePage();
+    }
+
     public void removeContact(ContactData contact) {
         ReturnToHomePage();
         SelectContact(contact);
@@ -70,6 +79,10 @@ public class ContactHelper extends HelperBase{
         type(By.name("firstname"), contact.firstName());
         type(By.name("middlename"), contact.middleName());
         type(By.name("lastname"), contact.lastName());
+    }
+
+    private void FillContactsFormFull(ContactData contact) {
+        FillContactsForm(contact);
         attach(By.name("photo"), contact.photo());
     }
 

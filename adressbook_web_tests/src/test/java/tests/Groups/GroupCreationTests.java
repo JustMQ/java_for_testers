@@ -15,16 +15,16 @@ public class GroupCreationTests extends TestBase {
 
     public static List<GroupData> groupProvider() throws IOException {
         var result = new ArrayList<GroupData>();
-//        for (var name : List.of("", "group name")) {
-//            for (var header : List.of("", "group header")) {
-//                for (var footer : List.of("", "group footer")) {
-//                    result.add(new GroupData()
-//                            .withName(name)
-//                            .withHeader(header)
-//                            .withFooter(footer));
-//                }
-//            }
-//        }
+        for (var name : List.of("", "group name")) {
+            for (var header : List.of("", "group header")) {
+                for (var footer : List.of("", "group footer")) {
+                    result.add(new GroupData()
+                            .withName(name)
+                            .withHeader(header)
+                            .withFooter(footer));
+                }
+            }
+        }
 
 //        String by string reading
 //        var json = "";
@@ -37,7 +37,6 @@ public class GroupCreationTests extends TestBase {
 //                 line = breader.readLine();
 //             }
 //        }
-
 
         var mapper = new XmlMapper();
         var value = mapper.readValue(new File("groups.xml"), new TypeReference<List<GroupData>>() {});
