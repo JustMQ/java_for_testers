@@ -13,7 +13,11 @@ public class GroupModificationTests extends TestBase {
     @Test
     void canModifyGroup() {
         if (app.groups().getCount() == 0) {
-            app.groups().createGroup(new GroupData("", "group name", "group header", "group footer"));
+            app.groups().createGroup(new GroupData(
+                    "",
+                    properties.getProperty("web.groupname"),
+                    properties.getProperty("web.groupheader"),
+                    properties.getProperty("web.groupfooter")));
         }
         var oldGroups = app.groups().getList();
         var rnd = new Random();

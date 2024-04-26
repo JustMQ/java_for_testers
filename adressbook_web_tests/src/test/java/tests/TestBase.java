@@ -3,19 +3,22 @@ package tests;
 import manager.ApplicationManager;
 import org.junit.jupiter.api.BeforeEach;
 
-import java.io.File;
+import java.io.*;
 import java.nio.file.Paths;
-import java.util.Random;
+import java.util.*;
 
 public class TestBase {
     protected static ApplicationManager app;
+    protected static Properties properties;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws IOException {
         if (app == null) {
+            properties = new Properties();
+            properties.load(new FileReader(System.getProperty("target", "local.properties")));
             app = new ApplicationManager();
+            app.init(System.getProperty("browser", "firefox"), properties);
         }
-        app.init(System.getProperty("browser", "firefox"));
     }
 
     public static String randomFile(String dir) {
