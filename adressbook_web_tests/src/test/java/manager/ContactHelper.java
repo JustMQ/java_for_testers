@@ -28,10 +28,28 @@ public class ContactHelper extends HelperBase{
 
         InitContactCreation();
         FillContactsForm(contact);
-        SelectGroup(group);
+        CreationContactSelectGroup(group);
         SubmitContactCreation();
         ReturnToHomePage();
     }
+
+    public void InviteContactInGroup(ContactData contact, GroupData group) {
+        ReturnToHomePage();
+        SelectContact(contact);
+        SelectGroupToInvite(group);
+        AddToGroup();
+        ReturnToContactsPage();
+    }
+
+    public void RemoveContactFromGroup(ContactData contact, GroupData group) {
+        ReturnToHomePage();
+        SelectGroupForCheckContacts(group);
+        SelectContact(contact);
+        RemoveFromGroup();
+        ReturnToContactsPage();
+    }
+
+
 
     public void createContactWithPhoto(ContactData contact) {
 
@@ -78,6 +96,10 @@ public class ContactHelper extends HelperBase{
         click(By.linkText("home"));
     }
 
+    private void AddToGroup() { click(By.name("add")); }
+
+    private void RemoveFromGroup() { click(By.name("remove")); }
+
     public boolean isContactPresent() {
         ReturnToHomePage();
         return manager.isElementPresent(By.name("selected[]"));
@@ -90,11 +112,26 @@ public class ContactHelper extends HelperBase{
         type(By.name("firstname"), contact.firstName());
         type(By.name("middlename"), contact.middleName());
         type(By.name("lastname"), contact.lastName());
+        type(By.name("address"), contact.address());
     }
 
-    private void SelectGroup(GroupData group) {
+    private void CreationContactSelectGroup(GroupData group) {
         new Select(manager.driver.findElement(By.name("new_group"))).selectByValue(group.id());
     }
+
+    private void SelectGroupToInvite(GroupData group) {
+        new Select(manager.driver.findElement(By.name("to_group"))).selectByValue(group.id());
+    }
+
+    private void AddGroupToInvite(GroupData group) {
+        new Select(manager.driver.findElement(By.name("to_group"))).selectByValue(group.id());
+    }
+
+    private void SelectGroupForCheckContacts(GroupData group) {
+        new Select(manager.driver.findElement(By.name("group"))).selectByValue(group.id());
+    }
+
+
 
     private void FillContactsFormFull(ContactData contact) {
         FillContactsForm(contact);

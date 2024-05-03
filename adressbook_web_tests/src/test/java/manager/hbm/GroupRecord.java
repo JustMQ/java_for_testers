@@ -1,8 +1,8 @@
 package manager.hbm;
 
 import jakarta.persistence.*;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+
 
 @Entity
 @Table(name = "group_list")

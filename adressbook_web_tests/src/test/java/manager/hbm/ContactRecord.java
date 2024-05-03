@@ -7,16 +7,38 @@ import jakarta.persistence.*;
 public class ContactRecord {
 
     @Id
+    @Column(name="id")
     public int id;
+    @Column(name="firstname")
     public String firstname;
+    @Column(name="middlename")
+    public String middlename;
+    @Column(name="lastname")
     public String lastname;
+    @Column(name="address")
     public String address;
+
+    public String nickname = new String();
+    public String company = new String();
+    public String title = new String();
+    public String addr_long = new String();
+    public String addr_lat = new String();
+    public String addr_status = new String();
+    public String home = new String();
+    public String mobile = new String();
+    public String work = new String();
+    public String fax = new String();
+    public String email = new String();
+    public String email2 = new String();
+    public String email3 = new String();
+    public String homepage = new String();
 
     public ContactRecord () {}
 
-    public ContactRecord (int id, String firstname, String lastname, String address) {
+    public ContactRecord (int id, String firstname, String middlename, String lastname, String address) {
         this.id = id;
         this.firstname = firstname;
+        this.middlename = middlename;
         this.lastname = lastname;
         this.address = address;
     }
