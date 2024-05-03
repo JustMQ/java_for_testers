@@ -44,14 +44,14 @@ public class ContactModificationTests extends TestBase {
 
     @Test
     void canInviteContactInGroup() {
-        if (app.groups().getCount() == 0) {
+        if (app.hbm().getGroupCount() == 0) {
             app.groups().createGroup(new GroupData(
                     "",
                     properties.getProperty("web.groupname"),
                     properties.getProperty("web.groupheader"),
                     properties.getProperty("web.groupfooter")));
         }
-        if (!app.contacts().isContactPresent()) {
+        if (app.hbm().getContactCount() == 0) {
             app.contacts().createContact(new ContactData(
                     "",
                     properties.getProperty("web.firstname"),
