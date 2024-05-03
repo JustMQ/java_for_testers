@@ -19,6 +19,7 @@ public class ContactModificationTests extends TestBase {
                     properties.getProperty("web.firstname"),
                     properties.getProperty("web.middlename"),
                     properties.getProperty("web.lastname"),
+                    "",
                     ""));
         }
         var oldContacts = app.contacts().getList();
