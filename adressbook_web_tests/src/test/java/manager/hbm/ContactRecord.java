@@ -2,6 +2,8 @@ package manager.hbm;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "addressbook")
 public class ContactRecord {
@@ -32,6 +34,12 @@ public class ContactRecord {
     public String email2 = new String();
     public String email3 = new String();
     public String homepage = new String();
+
+    @ManyToMany
+    @JoinTable(name = "address_in_groups",
+            joinColumns = @JoinColumn(name = "group_id"),
+            inverseJoinColumns = @JoinColumn(name = "id"))
+    public List<GroupRecord> groups;
 
     public ContactRecord () {}
 

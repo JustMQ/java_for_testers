@@ -44,6 +44,9 @@ public class ContactModificationTests extends TestBase {
 
     @Test
     void canInviteContactInGroup() {
+        var contactsWithGroup = app.hbm().getContactListWithGroups();
+        var allContacts = app.hbm().getContactList();
+        allContacts.removeAll(contactsWithGroup);
         if (app.hbm().getGroupCount() == 0) {
             app.groups().createGroup(new GroupData(
                     "",
@@ -51,7 +54,7 @@ public class ContactModificationTests extends TestBase {
                     properties.getProperty("web.groupheader"),
                     properties.getProperty("web.groupfooter")));
         }
-        if (app.hbm().getContactCount() == 0) {
+        if (allContacts.isEmpty()) {
             app.contacts().createContact(new ContactData(
                     "",
                     properties.getProperty("web.firstname"),
@@ -59,19 +62,18 @@ public class ContactModificationTests extends TestBase {
                     properties.getProperty("web.lastname"),
                     "",
                     ""));
+            allContacts = app.hbm().getContactList();
+            allContacts.removeAll(app.hbm().getContactListWithGroups());
         }
-        var oldContacts = app.contacts().getList();
         var rnd = new Random();
-        var index = rnd.nextInt(oldContacts.size());
-        var contact = oldContacts.get(index);
+        var index = rnd.nextInt(allContacts.size());
+        var contact = allContacts.get(index);
         var grouplist = app.hbm().getGroupList();
         var group = grouplist.get(rnd.nextInt(grouplist.size()));
         var oldRelated = app.hbm().getContactsInGroup(group);
         app.contacts().InviteContactInGroup(contact, group);
         var newRelated = app.hbm().getContactsInGroup(group);
         Assertions.assertEquals(oldRelated.size() + 1, newRelated.size());
-
-
     }
 
     @Test

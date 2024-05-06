@@ -131,8 +131,6 @@ public class ContactHelper extends HelperBase{
         new Select(manager.driver.findElement(By.name("group"))).selectByValue(group.id());
     }
 
-
-
     private void FillContactsFormFull(ContactData contact) {
         FillContactsForm(contact);
         attach(By.name("photo"), contact.photo());
