@@ -77,6 +77,19 @@ public class ContactHelper extends HelperBase{
         ReturnToContactsPage();
     }
 
+    public void getContactEditPageInfo(ContactData contact) {
+        ReturnToContactsPage();
+        InitContactModification(contact);
+        contact.withAddress(manager.driver.findElement(By.name("address")).getText())
+                .withHome(manager.driver.findElement(By.name("home")).getText())
+                .withMobile(manager.driver.findElement(By.name("mobile")).getText())
+                .withWork(manager.driver.findElement(By.name("work")).getText())
+                .withEmail(manager.driver.findElement(By.name("email")).getText())
+                .withEmail2(manager.driver.findElement(By.name("email2")).getText())
+                .withEmail3(manager.driver.findElement(By.name("email3")).getText());
+        ReturnToHomePage();
+    }
+
     private void UpdateContactCreation() {
         click(By.name("update"));
     }
@@ -160,11 +173,24 @@ public class ContactHelper extends HelperBase{
             var cells = tr.findElements(By.tagName("td"));
             var lastName = cells.get(1).getText();
             var firstName = cells.get(2).getText();
+            var adress = cells.get(3).getText();
+            var emails = cells.get(4).getText();
+            var phones = cells.get(5).getText();
             var checkbox = tr.findElement(By.name("selected[]"));
             var id = checkbox.getAttribute("value");
             contacts.add(new ContactData().withId(id).withFirstName(firstName).withLastName(lastName));
         }
         return contacts;
+    }
+
+    public String getAdress(ContactData contact) {
+        return  manager.driver.findElement(By.xpath(
+                String.format("//input[@id='%s']/../../td[4]", contact.id()))).getText();
+    }
+
+    public String getEmails(ContactData contact) {
+        return  manager.driver.findElement(By.xpath(
+                String.format("//input[@id='%s']/../../td[5]", contact.id()))).getText();
     }
 
     public String getPhones(ContactData contact) {

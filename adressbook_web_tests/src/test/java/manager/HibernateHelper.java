@@ -65,7 +65,18 @@ public class HibernateHelper extends HelperBase {
         if ("".equals(id)) {
             id = "0";
         }
-        return new ContactRecord(Integer.parseInt(id), data.firstName(), data.middleName(), data.lastName(), data.address());
+        return new ContactRecord(
+                Integer.parseInt(id),
+                data.firstName(),
+                data.middleName(),
+                data.lastName(),
+                data.address(),
+                data.home(),
+                data.mobile(),
+                data.work(),
+                data.email(),
+                data.email2(),
+                data.email3());
     }
 
     public List<GroupData> getGroupList() {

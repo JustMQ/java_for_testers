@@ -19,7 +19,7 @@ public class ContactRemovalTests extends TestBase {
                     properties.getProperty("web.middlename"),
                     properties.getProperty("web.lastname"),
                     "",
-                    "", "", "", "", ""));
+                    "", "", "", "", "", "", "", ""));
         }
         var oldContacts = app.hbm().getContactList();
         var rnd = new Random();

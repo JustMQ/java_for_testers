@@ -24,7 +24,7 @@ public class ContactModificationTests extends TestBase {
                     properties.getProperty("web.middlename"),
                     properties.getProperty("web.lastname"),
                     "",
-                    "", "", "", "", ""));
+                    "", "", "", "", "", "", "", ""));
         }
         var oldContacts = app.hbm().getContactList();
         var rnd = new Random();
@@ -61,7 +61,7 @@ public class ContactModificationTests extends TestBase {
                     properties.getProperty("web.middlename"),
                     properties.getProperty("web.lastname"),
                     "",
-                    "", "", "", "", ""));
+                    "", "", "", "", "", "", "", ""));
             allContacts = app.hbm().getContactList();
             allContacts.removeAll(app.hbm().getContactListWithGroups());
         }

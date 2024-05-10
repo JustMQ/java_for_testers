@@ -44,11 +44,29 @@ public class ContactRecord {
 
     public ContactRecord () {}
 
-    public ContactRecord (int id, String firstname, String middlename, String lastname, String address) {
+    public ContactRecord (
+            int id,
+            String firstname,
+            String middlename,
+            String lastname,
+            String address,
+            String home,
+            String mobile,
+            String work,
+            String email,
+            String email2,
+            String email3) {
         this.id = id;
         this.firstname = firstname;
         this.middlename = middlename;
         this.lastname = lastname;
         this.address = address;
+        this.home = home;
+        this.mobile = mobile;
+        this.work = work;
+        this.email = email;
+        this.email2 = email2;
+        this.email3 = email3;
+
     }
 }
