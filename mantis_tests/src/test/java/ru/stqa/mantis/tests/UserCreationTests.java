@@ -1,10 +1,10 @@
 package ru.stqa.mantis.tests;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.stqa.mantis.common.CommonFunctions;
 import ru.stqa.mantis.model.DeveloperMailUser;
+import ru.stqa.mantis.model.RegistrationFormData;
 
 import java.time.Duration;
 
@@ -23,8 +23,27 @@ public class UserCreationTests extends TestBase {
         Assertions.assertTrue(app.http().isLoggedIn());
     }
 
-    @AfterEach
-    void deleteMailUser() {
-        app.developerMail().deleteUser(user);
+    @Test
+    void canCreateUserWithApi() {
+        var userNameRandomizer = CommonFunctions.randomString(8);
+        app.jamesApi().addUser(
+                String.format("%s@localhost", userNameRandomizer),
+                "password");
+        app.rest().createNewUser(
+                new RegistrationFormData()
+                        .withUsername(userNameRandomizer)
+                        .withEmail(String.format("%s@localhost", userNameRandomizer))
+        );
+        var message = app.mail().receive(String.format("%s@localhost", userNameRandomizer), "password", Duration.ofSeconds(60));
+        var url = CommonFunctions.extractUrl(message.get(0).content());
+        app.user().finishCreation(url, "password");
+        app.http().login(userNameRandomizer, "password");
+        Assertions.assertTrue(app.http().isLoggedIn());
+
     }
+
+//    @AfterEach
+//    void deleteMailUser() {
+//        app.developerMail().deleteUser(user);
+//    }
 }
