@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.net.CookieManager;
 
 public class JamesApiHelper extends HelperBase {
-    public static final MediaType JSON = MediaType.get("application/json");
 
+    public static final MediaType JSON = MediaType.get("application/json");
     OkHttpClient client;
 
     public JamesApiHelper(ApplicationManager manager) {

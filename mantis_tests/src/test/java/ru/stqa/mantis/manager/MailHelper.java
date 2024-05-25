@@ -42,7 +42,7 @@ public class MailHelper extends HelperBase{
                 throw new RuntimeException(e);
             }
             try {
-                Thread.sleep(1000);
+                Thread.sleep(10000);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
