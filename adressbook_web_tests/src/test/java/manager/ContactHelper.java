@@ -109,7 +109,7 @@ public class ContactHelper extends HelperBase{
     }
 
     private void ReturnToHomePage() {
-        click(By.linkText("home"));
+        click(By.id("logo"));
     }
 
     private void AddToGroup() { click(By.name("add")); }
