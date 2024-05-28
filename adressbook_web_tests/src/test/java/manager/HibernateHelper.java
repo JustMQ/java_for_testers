@@ -1,5 +1,6 @@
 package manager;
 
+import io.qameta.allure.Step;
 import manager.hbm.ContactInGroupRecord;
 import manager.hbm.ContactRecord;
 import manager.hbm.GroupRecord;
@@ -78,25 +79,25 @@ public class HibernateHelper extends HelperBase {
                 data.email2(),
                 data.email3());
     }
-
+    @Step
     public List<GroupData> getGroupList() {
         return convertList(sessionFactory.fromSession(session -> {
             return session.createQuery("from GroupRecord", GroupRecord.class).list();
         }));
     }
-
+    @Step
     public long getGroupCount() {
         return sessionFactory.fromSession(session -> {
             return session.createQuery("select count (*) from GroupRecord", long.class).getSingleResult();
         });
     }
-
+    @Step
     public List<ContactInGroupRecord> getAddressInGroupsList() {
         return sessionFactory.fromSession(session -> {
             return session.createQuery("from ContactInGroupRecord", ContactInGroupRecord.class).list();
         });
     }
-
+    @Step
     public void createGroup(GroupData groupData) {
         sessionFactory.inSession(session -> {
             session.getTransaction().begin();
@@ -104,19 +105,19 @@ public class HibernateHelper extends HelperBase {
             session.getTransaction().commit();
         });
     }
-
+    @Step
     public List<ContactData> getContactsInGroup(GroupData group) {
         return sessionFactory.fromSession(session -> {
             return convertContactList(session.get(GroupRecord.class, group.id()).contacts);
         });
     }
-
+    @Step
     public long getContactCount() {
         return sessionFactory.fromSession(session -> {
             return session.createQuery("select count (*) from ContactRecord", long.class).getSingleResult();
         });
     }
-
+    @Step
     public void createContact(ContactData contactData) {
         sessionFactory.inSession(session -> {
             session.getTransaction().begin();
@@ -124,13 +125,13 @@ public class HibernateHelper extends HelperBase {
             session.getTransaction().commit();
         });
     }
-
+    @Step
     public List<ContactData> getContactList() {
         return convertContactList(sessionFactory.fromSession(session -> {
             return session.createQuery("from ContactRecord", ContactRecord.class).list();
         }));
     }
-
+    @Step
     public List<ContactData> getContactListWithGroups() {
         return convertContactList(sessionFactory.fromSession(session -> session.createQuery(
                 "from ContactRecord ab join ContactInGroupRecord ag on ab.id = ag.id", ContactRecord.class).list()));

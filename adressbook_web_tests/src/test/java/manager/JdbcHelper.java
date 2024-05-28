@@ -1,5 +1,6 @@
 package manager;
 
+import io.qameta.allure.Step;
 import model.ContactData;
 import model.GroupData;
 
@@ -11,7 +12,7 @@ import java.util.List;
 public class JdbcHelper extends HelperBase{
 
     public JdbcHelper(ApplicationManager manager) {super(manager);}
-
+    @Step
     public List<GroupData> getGroupList() {
         var groups = new ArrayList<GroupData>();
         try (var conn = DriverManager.getConnection("jdbc:mysql://localhost/addressbook", "root", "");
@@ -30,7 +31,7 @@ public class JdbcHelper extends HelperBase{
         }
         return groups;
     }
-
+    @Step
     public void checkConsistency() {
         try (var conn = DriverManager.getConnection("jdbc:mysql://localhost/addressbook", "root", "");
              var statement = conn.createStatement();
@@ -44,7 +45,7 @@ public class JdbcHelper extends HelperBase{
             throw new RuntimeException(e);
         }
     }
-
+    @Step
     public List<ContactData> getContactList() {
         var contacts = new ArrayList<ContactData>();
         try (var conn = DriverManager.getConnection("jdbc:mysql://localhost/addressbook", "root", "");
